@@ -3,15 +3,35 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private float m_moveSpeed = 5;
+    private Vector3 m_moveDir;
+    private Rigidbody2D m_rigidbody2D;
+    private Transform m_playerTransform;
+
+
+    void Awake()
     {
-        
+        m_rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetTarget(Transform pTransform)
     {
-        
+        m_playerTransform = pTransform;
+    }
+
+    public void SetMoveSpeed(float pSpeed)
+    {
+        m_moveSpeed = pSpeed;
+    }
+
+    void FixedUpdate()
+    {
+        if (m_playerTransform == null)
+            return;
+
+        m_moveDir = m_playerTransform.position - transform.position;
+        m_moveDir.Normalize();
+
+        m_rigidbody2D.MovePosition(transform.position + m_moveDir * m_moveSpeed * Time.deltaTime);
     }
 }

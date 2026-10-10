@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 
@@ -27,20 +26,20 @@ public class PlayerController : MonoBehaviour
         m_muzzle.transform.position = transform.position + m_muzzleDir * m_muzzleOffset;
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext pContext)
     {
-        if (context.started)
+        if (pContext.started)
             return;
 
-        m_moveDir = context.ReadValue<Vector2>();
+        m_moveDir = pContext.ReadValue<Vector2>();
 
         if (m_moveDir != Vector3.zero)
             m_muzzleDir = m_moveDir;
     }
 
-    public void OnFire(InputAction.CallbackContext context)
+    public void OnFire(InputAction.CallbackContext pContext)
     {
-        if (context.performed)
+        if (pContext.performed)
             return;
 
         
