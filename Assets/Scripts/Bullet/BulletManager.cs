@@ -22,8 +22,8 @@ public class BulletManager : MonoBehaviour
         for (int i = 0; i < m_maxBulletCount; i++)
         {
             m_bullets[i] = Instantiate(m_bulletPrefab);
-            m_bullets[i].transform.position = Vector3.zero;
             m_bullets[i].transform.SetParent(transform);
+            m_bullets[i].transform.position = Vector3.zero;
             m_bullets[i].gameObject.SetActive(false);
         }
     }

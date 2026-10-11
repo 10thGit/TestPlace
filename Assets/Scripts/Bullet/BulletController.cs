@@ -38,9 +38,9 @@ public class BulletController : MonoBehaviour
         m_fired = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D pCollision)
     {
-        if (collision.transform.CompareTag("Enemy"))
+        if (pCollision.transform.CompareTag("Enemy"))
         {
             m_fired = false;
             gameObject.SetActive(false);
