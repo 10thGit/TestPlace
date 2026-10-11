@@ -6,9 +6,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private EnemyController m_enemyPrefab;
     [SerializeField] private Transform m_playerTransform;
     [SerializeField] private int m_maxEnemyCount = 10;
-    [SerializeField][Range(1f, 10f)] private float moveSpeed = 1;
 
-    private EnemyController[] enemies = null;
+    private EnemyController[] m_enemies = null;
 
 
     void Start()
@@ -16,22 +15,23 @@ public class EnemyManager : MonoBehaviour
         if (m_enemyPrefab == null)
         {
             Debug.LogError("EnemyPrefab is NULL");
+            return;
         }
 
         if (m_playerTransform == null)
         {
             Debug.LogError("PlayerTransform is NULL");
+            return;
         }
 
-        enemies = new EnemyController[m_maxEnemyCount];
+        m_enemies = new EnemyController[m_maxEnemyCount];
 
         for (int i = 0; i < m_maxEnemyCount; i++)
         {
-            enemies[i] = Instantiate(m_enemyPrefab);
-            enemies[i].transform.SetParent(transform);
-            enemies[i].SetTarget(m_playerTransform);
-            enemies[i].SetMoveSpeed(moveSpeed);
-            enemies[i].SetColor(new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f)));
+            m_enemies[i] = Instantiate(m_enemyPrefab);
+            m_enemies[i].transform.SetParent(transform);
+            m_enemies[i].SetTarget(m_playerTransform);
+            m_enemies[i].SetColor(new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f)));
         }
 
 
@@ -66,8 +66,8 @@ public class EnemyManager : MonoBehaviour
         {
             angle += offset;
             var pos = new Vector3(Mathf.Sin(angle) * radius, Mathf.Cos(angle) * radius, 0);
-            enemies[i].transform.position = center + pos;
-            enemies[i].gameObject.SetActive(true);
+            m_enemies[i].transform.position = center + pos;
+            m_enemies[i].gameObject.SetActive(true);
         }
     }
 
@@ -84,8 +84,8 @@ public class EnemyManager : MonoBehaviour
             int x = i % width;
             int y = i / width;
             Vector3 pos = new Vector3(distance - x, y - (height - 1) / 2f, 0);
-            enemies[i].transform.position = center + pos;
-            enemies[i].gameObject.SetActive(true);
+            m_enemies[i].transform.position = center + pos;
+            m_enemies[i].gameObject.SetActive(true);
         }
     }
 
@@ -102,8 +102,8 @@ public class EnemyManager : MonoBehaviour
             int x = i % width;
             int y = i / width;
             Vector3 pos = new Vector3(distance - (width - 1) + x, y - (height - 1) / 2f, 0);
-            enemies[i].transform.position = center + pos;
-            enemies[i].gameObject.SetActive(true);
+            m_enemies[i].transform.position = center + pos;
+            m_enemies[i].gameObject.SetActive(true);
         }
     }
 }

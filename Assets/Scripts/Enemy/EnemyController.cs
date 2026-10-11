@@ -16,12 +16,14 @@ public class EnemyController : MonoBehaviour
         if(m_rigidbody2D == null)
         {
             Debug.LogError("Rigidbody2D is NULL");
+            return;
         }
 
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         if (m_spriteRenderer == null)
         {
             Debug.LogError("SpriteRenderer is NULL");
+            return;
         }
     }
 
@@ -30,14 +32,9 @@ public class EnemyController : MonoBehaviour
         m_playerTransform = pTransform;
     }
 
-    public void SetColor(Color color)
+    public void SetColor(Color pColor)
     {
-        m_spriteRenderer.color = color;
-    }
-
-    public void SetMoveSpeed(float pSpeed)
-    {
-        m_moveSpeed = pSpeed;
+        m_spriteRenderer.color = pColor;
     }
 
     void FixedUpdate()

@@ -148,6 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d890f63a05e244b9222cdf356bf6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_maxBulletCount: 10
+  m_bulletPrefab: {fileID: 6059953614949912010, guid: c9683538442df584fb6437499d48681d, type: 3}
 --- !u!4 &161814886
 Transform:
   m_ObjectHideFlags: 0
@@ -761,9 +763,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1f84602a334c324e828bc7a3dd5b39a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_muzzle: {fileID: 1206021340}
-  m_muzzleOffset: 0.52
   moveSpeed: 5
+  m_muzzleOffset: 0.52
+  m_muzzle: {fileID: 1206021340}
+  m_bulletManager: {fileID: 161814885}
 --- !u!114 &1875567964
 MonoBehaviour:
   m_ObjectHideFlags: 0

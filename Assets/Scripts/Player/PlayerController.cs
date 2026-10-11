@@ -4,9 +4,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject m_muzzle;
+    [SerializeField][Range(0, 10)] private float m_moveSpeed = 5;
     [SerializeField][Range(0.3f, 1)] private float m_muzzleOffset = 0.5f;
-    [SerializeField][Range(0, 10)] private float moveSpeed = 5;
+    [SerializeField] private GameObject m_muzzle;
+    [SerializeField] private BulletManager m_bulletManager;
 
     private Vector3 m_moveDir = Vector3.zero;
     private Vector3 m_muzzleDir = Vector3.zero;
@@ -17,12 +18,18 @@ public class PlayerController : MonoBehaviour
         if (m_muzzle == null)
         {
             Debug.LogError("Muzzle is NULL");
+            return;
+        }
+        if (m_bulletManager == null)
+        {
+            Debug.LogError("BulletManager is NULL");
+            return;
         }
     }
 
     private void Update()
     {
-        transform.position += m_moveDir * moveSpeed * Time.deltaTime;
+        transform.position += m_moveDir * m_moveSpeed * Time.deltaTime;
         m_muzzle.transform.position = transform.position + m_muzzleDir * m_muzzleOffset;
     }
 
@@ -39,10 +46,9 @@ public class PlayerController : MonoBehaviour
 
     public void OnFire(InputAction.CallbackContext pContext)
     {
-        if (pContext.performed)
+        if (!pContext.performed)
             return;
 
-        
-
+        m_bulletManager.Fire(transform.position, m_muzzleDir);
     }
 }
